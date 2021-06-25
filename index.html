@@ -25,10 +25,10 @@
         <nav>
             <h1>Pokédex</h1>
 
-            <form class="search-box">
-                <input type="search" placeholder="nome/Id do Pokemon">
+            <div class="search-box">
+                <input type="search" id="in_nomeId" placeholder="nome/Id do Pokemon">
 
-                <button type="submit">
+                <button type="submit" onclick="searchPokemon(in_nomeId.value)">
                     <svg class="svg-icon search-icon" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7">
                         <g class="search-path" fill="none" stroke="#848F91">
                             <path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/>
@@ -36,7 +36,7 @@
                          </g>
                      </svg>
                 </button>
-            </form>
+            </div>
         </nav>
 
         <div class="pokemons-box" id="pokemonBox">
@@ -62,3 +62,94 @@
     </div>
 </body>
 </html>
+
+<script>
+
+    async function searchPokemon(pokemon_idNome) {
+        // const responsePokemon = async () => {
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon_idNome}`, {
+                method: 'get'
+            });
+
+            const pokemonEspec = await response.json();
+            console.log(pokemonEspec);
+
+            return pokemonEspec;
+        // }
+
+        
+            let jsons = {}
+            jsons = pokemonEspec;
+            console.log(jsons);
+
+
+    
+
+
+    
+        // const pokemonDesc = pokemonEspec;
+        // console.log(pokemonDesc);
+
+        pokemonEspec.forEach(pokemon => {
+            pokemonBox.innerHTML = `
+            <div class="pokemons-item">
+                <p class="pokemon-id">N° 001</p>
+                <center>
+                    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png" class="img">
+                    <p class="pokemon-name">${pokemon.name}</p>
+                    
+                    <div class="pokemons-type">
+                        <div class="type-item">
+                            <p>type 1</p>
+                        </div>
+                        <div class="type-item">
+                            <p>type 2</p>
+                        </div>
+                    </div>
+                </center>
+            </div>`;
+        });
+
+        // const PokeEsc = {
+        //     init: () => {
+        //         PokeEsc.postPokemon();
+        //     },
+        //     getPokemon: async () => {
+        //         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon_idNome}`, {
+        //             method: 'get'
+        //         });
+
+        //         const pokemonEspec = await response.json();
+        //         console.log(pokemonEspec);
+                
+        //         return pokemonEspec;
+        //     },
+        //     postPokemon: async () => {
+        //         const pokemonDesc = await PokeEsc.getPokemon();
+
+        //         pokemonDesc.forEach(aaa => {
+        //             pokemonBox.innerHTML = `
+        //             <div class="pokemons-item">
+        //                 <p class="pokemon-id">N° 001</p>
+        //                 <center>
+        //                     <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png" class="img">
+        //                     <p class="pokemon-name">${pokemon.name}</p>
+                            
+        //                     <div class="pokemons-type">
+        //                         <div class="type-item">
+        //                             <p>type 1</p>
+        //                         </div>
+        //                         <div class="type-item">
+        //                             <p>type 2</p>
+        //                         </div>
+        //                     </div>
+        //                 </center>
+        //             </div>`;
+        //         });
+        //     }
+        // }
+
+        // PokeEsc.init();
+    }
+    
+</script>

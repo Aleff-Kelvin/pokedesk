@@ -17,15 +17,9 @@ const Main = {
     },
     postPokemons: async () => {
         const pokemonsList = await Main.getPokemons();
+        // console.log(pokemonsList);
 
         pokemonsList.forEach(pokemon => {
-            // const responsePokemon = fetch(`${pokemon.url}`, {
-            //     method: 'get'
-            // });
-
-            // const pokemonInfo = responsePokemon.json();
-            // console.log(pokemonInfo); 
-
             pokemonBox.innerHTML += `
             <div class="pokemons-item">
                 <p class="pokemon-id">N° 001</p>
